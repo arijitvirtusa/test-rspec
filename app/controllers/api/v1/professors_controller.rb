@@ -9,19 +9,27 @@ class Api::V1::ProfessorsController < ApplicationController
   end
 
   def create
-    professor = Professor.new(professor_params)
-    if professor&.save
-      render json: { message: 'Professor Created Successfully', errors: nil }, status: 200
-    else
-      render json: { message: 'Failed To Create Professor', errors: professor&.errors&.messages }, status: 422
+    begin
+      professor = Professor.new(professor_params)
+      if professor&.save
+        render json: { message: 'Professor Created Successfully', errors: nil }, status: 200
+      else
+        render json: { message: 'Failed To Create Professor', errors: professor&.errors&.messages }, status: 422
+      end
+    rescue ActiveRecord::ActiveRecordError
+      render json: { message: 'Failed To Create Professor', errors: nil }, status: 422
     end
   end
 
   def show
-    @professor = Professor.find(params[:id])
-    if @professor
-      render json: { professor: @professor, message: 'Professor details', errors: nil }, status: 200
-    else
+    begin
+      @professor = Professor.find(params[:id])
+      if @professor
+        render json: { professor: @professor, message: 'Professor details', errors: nil }, status: 200
+      else
+        render json: { message: 'Professor details not found', errors: nil }, status: 404
+      end
+    rescue ActiveRecord::RecordNotFound
       render json: { message: 'Professor details not found', errors: nil }, status: 404
     end
   end
