@@ -1,0 +1,149 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/professors":
+    post:
+      summary: Creates a professor
+      tags:
+      - Professors
+      parameters: []
+      responses:
+        '201':
+          description: professor created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                mobile:
+                  type: string
+                designation:
+                  type: string
+                dob:
+                  type: date
+                joining_date:
+                  type: date
+                qualification:
+                  type: string
+              required:
+              - name
+              - email
+              - designation
+              - dob
+              - joining_date
+              - qualification
+          application/xml:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                mobile:
+                  type: string
+                designation:
+                  type: string
+                dob:
+                  type: date
+                joining_date:
+                  type: date
+                qualification:
+                  type: string
+              required:
+              - name
+              - email
+              - designation
+              - dob
+              - joining_date
+              - qualification
+  "/api/v1/professors/{id}":
+    get:
+      summary: Retrieves a professor
+      tags:
+      - Professors
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: professor found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  mobile:
+                    type: string
+                  designation:
+                    type: string
+                  dob:
+                    type: date
+                  joining_date:
+                    type: date
+                  qualification:
+                    type: string
+                required:
+                - id
+                - name
+                - email
+                - mobile
+                - designation
+                - dob
+                - joining_date
+                - qualification
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  mobile:
+                    type: string
+                  designation:
+                    type: string
+                  dob:
+                    type: date
+                  joining_date:
+                    type: date
+                  qualification:
+                    type: string
+                required:
+                - id
+                - name
+                - email
+                - mobile
+                - designation
+                - dob
+                - joining_date
+                - qualification
+        '404':
+          description: professor not found
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com

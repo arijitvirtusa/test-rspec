@@ -27,7 +27,7 @@ describe 'Professors API' do
       end
 
       response '422', 'invalid request' do
-        let(:professor) { { name: 'Dodo', email: 'dodo@gmail.com', mobile: '9874563210', designation: 'HOD', dob: '16/05/1989', joining_date: '27/12/2021', qualification: 'B.Tech' } }
+        let(:professor) { { name: 'Dodo', email: 'dodogmail.com', mobile: '98745210', designation: 'HOD', dob: '16/05/1989', joining_date: '27', qualification: 'B.Tech' } }
         run_test!
       end
     end
@@ -40,7 +40,7 @@ describe 'Professors API' do
       produces 'application/json', 'application/xml'
       parameter name: :id, :in => :path, :type => :string
 
-      response '200', 'name found' do
+      response '200', 'professor found' do
         schema type: :object,
           properties: {
             id: { type: :integer, },
@@ -59,7 +59,7 @@ describe 'Professors API' do
       end
 
       response '404', 'professor not found' do
-        let(:id) { 'professor' }
+        let(:id) { '2' }
         run_test!
       end
     end

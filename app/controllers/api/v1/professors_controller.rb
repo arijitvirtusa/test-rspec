@@ -12,7 +12,7 @@ class Api::V1::ProfessorsController < ApplicationController
     begin
       professor = Professor.new(professor_params)
       if professor&.save
-        render json: { message: 'Professor Created Successfully', errors: nil }, status: 200
+        render json: { message: 'Professor Created Successfully', errors: nil }, status: 201
       else
         render json: { message: 'Failed To Create Professor', errors: professor&.errors&.messages }, status: 422
       end
@@ -25,7 +25,7 @@ class Api::V1::ProfessorsController < ApplicationController
     begin
       @professor = Professor.find(params[:id])
       if @professor
-        render json: { professor: @professor, message: 'Professor details', errors: nil }, status: 200
+        render json:  @professor , status: 200
       else
         render json: { message: 'Professor details not found', errors: nil }, status: 404
       end
