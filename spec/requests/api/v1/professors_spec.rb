@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::Professors", type: :request do
-  describe 'Create Professor' do
+  describe 'When we want to create Professor' do
     let(:request_params) do
       {
         name: 'Dodo',
@@ -25,7 +25,7 @@ RSpec.describe "Api::V1::Professors", type: :request do
       }
     end
 
-    context 'For Success' do
+    context 'We provide valid params for professor' do
       before do
         post '/api/v1/professors', params: request_params, as: :json
       end
